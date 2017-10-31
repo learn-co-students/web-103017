@@ -1,0 +1,12 @@
+# List all of the gems / packages / libraries that
+# we will use in THIS project only.
+
+# This file works with a program called Bundler
+
+# When you call `bundle install`, looks for the Gemfile,
+# then downloads all the gems stated in that file.
+source 'https://rubygems.org'
+
+gem 'pry'
+gem 'rest-client'
+gem 'json'
