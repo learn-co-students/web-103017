@@ -34,3 +34,9 @@
   * bin
     * Run
   * Gemfile
+
+* Relationships
+  * CheckingAccount and SavingsAccount inherit from BankAccount
+    * ![inheritance.png](inheritance.png)
+  * Customer has many accounts
+    * ![association.png](association.png)

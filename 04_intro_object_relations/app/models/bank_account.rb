@@ -10,6 +10,8 @@ class BankAccount
     @customer = customer
     @pin = pin
     @balance = balance
+    
+    # Account has many transactions
     @transactions = []
 
     @account_number = @@account_number

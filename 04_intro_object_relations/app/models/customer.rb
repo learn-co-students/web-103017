@@ -1,5 +1,6 @@
 class Customer
   attr_accessor :name, :email, :phone
+  attr_reader :accounts
 
   # Class instance variable
   # Describes variables for this (version of this) class ONLY
@@ -12,10 +13,6 @@ class Customer
 
     # Customer has many accounts
     @accounts = []
-  end
-
-  def accounts
-    @accounts
   end
 
   def add_savings_account(pin, balance = 0)

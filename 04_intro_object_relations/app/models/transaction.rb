@@ -1,6 +1,6 @@
 class Transaction
-  attr_reader :amount, :memo, :balance
   # actions that affect my balance
+  attr_reader :amount, :memo, :balance
 
   # EACH TRANSACTION
   # belongs to a bank account (reference to ...)
@@ -19,9 +19,9 @@ class Transaction
     @@id += 1
 
     @account = account
+    @balance = account.balance # updated account balance
     @amount = amount
     @memo = memo
-    @balance = account.balance
   end
 
   def customer
