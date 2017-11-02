@@ -6,6 +6,7 @@ class BankAccount
   @@account_number = 1
 
   def initialize(customer, pin, balance = 0)
+    # Belongs to a customer
     @customer = customer
     @pin = pin
     @balance = balance
