@@ -21,4 +21,8 @@ class Customer
   def add_savings_account(pin, balance = 0)
     @accounts << SavingsAccount.new(self, pin, balance)
   end
+
+  def add_checking_account(pin, balance = 0)
+    @accounts << CheckingAccount.new(self, pin, balance)
+  end
 end

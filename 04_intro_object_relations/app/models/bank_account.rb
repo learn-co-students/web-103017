@@ -1,5 +1,5 @@
 class BankAccount
-  attr_reader :account_number
+  attr_reader :account_number, :balance, :transactions
   attr_writer :pin
   attr_accessor :customer
 
@@ -10,6 +10,7 @@ class BankAccount
     @customer = customer
     @pin = pin
     @balance = balance
+    @transactions = []
 
     @account_number = @@account_number
     @@account_number += 1
@@ -17,6 +18,7 @@ class BankAccount
 
   def deposit(amount)
     @balance += amount
+    @transactions << Transaction.new(self, amount)
   end
 
   def withdraw(amount)
@@ -26,6 +28,7 @@ class BankAccount
       raise "You don't have enough money."
     else
       @balance = new_balance
+      @transactions << Transaction.new(self, -1 * amount)
     end
   end
 end
