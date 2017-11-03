@@ -1,5 +1,3 @@
-require_relative 'bank_account'
-
 class SavingsAccount < BankAccount
   # This class has all the same methods as BankAccount
 

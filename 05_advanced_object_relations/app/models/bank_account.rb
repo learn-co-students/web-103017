@@ -1,4 +1,8 @@
 class BankAccount
+  # make all instance methods in the module,
+  # instance methods for this class
+  include Alertable
+
   attr_reader :account_number, :balance, :transactions
   attr_writer :pin
   attr_accessor :customer
@@ -10,7 +14,7 @@ class BankAccount
     @customer = customer
     @pin = pin
     @balance = balance
-    
+
     # Account has many transactions
     @transactions = []
 
