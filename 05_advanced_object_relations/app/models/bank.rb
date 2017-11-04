@@ -7,18 +7,22 @@ class Bank
   # name
 
   attr_reader :name
-  attr_accessor :customers
 
+  # Bank.new("usaa")
   def initialize(name)
     @name = name
     @customers = []
   end
 
-  def add_branch(city)
-    Branch.new(self, city)
+  # tim = Customer.new(...)
+  # usaa.add_customer(tim)
+  def add_customer(customer)
+    @customers << customer
   end
 
   def branches
-
+    Branch.all.select do |branch|
+      branch.bank == self
+    end
   end
 end
