@@ -38,4 +38,10 @@ class Bank
       customer.bank == self
     end
   end
+
+  def accounts
+    BankAccount.all.select do |account|
+      account.customer.bank == self
+    end
+  end
 end

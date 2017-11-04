@@ -1,12 +1,16 @@
-# Getting Started
+# Object Relations
+
+## Getting Started
 
 1. If you don't have this repo, `git clone` the parent
 1. If you do have this repo, `git pull` for latest code
 1. Run `bundle install`
 1. Run `ruby bin/run.rb`
-# Object Relations
 
----
+## Domain Model
+![Domain Model](domain_model.png)
+
+## Object Relations
 * **Relationships**
   * ~~Inheritance ("is a")~~
   * ~~Association ("has one/has many/belongs to")~~
