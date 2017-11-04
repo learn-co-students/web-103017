@@ -1,28 +1,41 @@
 class Bank
-  # has many customers
-  # has many branches
-  # has many cities, through branches
-
-  # @customers
-  # name
+  # RELATIONSHIPS
+  # has_many
+  #   customers
+  #   accounts, through customers
+  #   branches
+  #   cities, through branches
 
   attr_reader :name
 
-  # Bank.new("usaa")
   def initialize(name)
     @name = name
-    @customers = []
   end
 
-  # tim = Customer.new(...)
-  # usaa.add_customer(tim)
   def add_customer(customer)
-    @customers << customer
+    customer.bank = self
+    customer
+  end
+
+  def add_branch(city)
+    Branch.new(self, city)
   end
 
   def branches
     Branch.all.select do |branch|
       branch.bank == self
+    end
+  end
+
+  def cities
+    self.branches.map do |branch|
+      branch.city
+    end.uniq
+  end
+
+  def customers
+    Customer.all.select do |customer|
+      customer.bank == self
     end
   end
 end

@@ -1,19 +1,14 @@
 class SavingsAccount < BankAccount
-  # This class has all the same methods as BankAccount
-
+  TYPE = 'savings'
+  
   def initialize(name, pin, balance = 0)
     @withdrawals = 0
-    # bank_account.initialize(name, pin, balance)
-    super # can call with or without args
+    super
   end
 
   def withdraw(amount)
-    # super
-    # @withdrawals ||= 0 # FIX! number of withdrawals
-    # @withdrawals = @withdrawals || 0
-
     if @withdrawals > 6
-      raise "Too many withdrawals"
+      puts_balance_update_failure(-1 * amount, "Too many withdrawals")
     else
       super
       @withdrawals += 1

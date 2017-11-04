@@ -1,25 +1,46 @@
 class Customer
-  attr_accessor :name, :email, :phone
-  attr_reader :accounts
+  # RELATIONSHIPS
+  #   has many
+  #     accounts
+  #   belongs to
+  #     bank
 
-  # Class instance variable
-  # Describes variables for this (version of this) class ONLY
-  # @accounts = []
+  attr_accessor :name, :email, :phone, :bank
 
-  def initialize(name, email = '', phone = '')
+  @@all = []
+
+  def initialize(name, email = '', phone = '', bank = nil)
+    @bank = bank
     @name = name
     @email = email
     @phone = phone
 
-    # Customer has many accounts
-    @accounts = []
+    @@all << self
+  end
+
+  def accounts
+    BankAccount.all.select do |account|
+      account.customer == self
+    end
   end
 
   def add_savings_account(pin, balance = 0)
-    @accounts << SavingsAccount.new(self, pin, balance)
+    if !self.bank
+      raise "You don't have a bank"
+    end
+
+    SavingsAccount.new(self, pin, balance)
   end
 
   def add_checking_account(pin, balance = 0)
-    @accounts << CheckingAccount.new(self, pin, balance)
+    if !self.bank
+      raise "You don't have a bank"
+    end
+
+    CheckingAccount.new(self, pin, balance)
+  end
+
+  def self.all
+    @@all
   end
 end

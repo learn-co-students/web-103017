@@ -1,10 +1,10 @@
 class City
-  # has many (bank) branches
-  # has many banks, through branches
+  # RELATIONSHIPS
+  #   has many branches
+  #   has many banks, through branches
 
   attr_reader :name
 
-  # nyc = City.new('nyc')
   def initialize(name)
     @name = name
   end
@@ -13,8 +13,11 @@ class City
     Branch.all.select do |branch|
       branch.city == self
     end
-    # get Branch
-    # go through all class variable
-    # select cities
+  end
+
+  def banks
+    self.branches.map do |branch|
+      branch.bank
+    end.uniq
   end
 end
