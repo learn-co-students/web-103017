@@ -18,7 +18,7 @@
     * Delete
 * **Deliverables**
   * `Station`
-    * `Station.new(hash_of_attrs_and_values)` => Returns unsaved instance
+    * `Station.new({name: 'Union Sq', line: 'Broadway', division: 'IRT', latitude: 10.03, longitude: 10.04})` => Returns unsaved instance
     * `Station.create(hash_of_attrs_and_values)` => Returns saved instance
     * `Station.all` => Returns all instances of station from DB
     * `Station.find(id)` => Returns first instance with ID
@@ -26,7 +26,7 @@
     * `Station#save` => Returns saved instance
     * `Station#update` => Returns updated instance
     * `Station#delete` => Deletes one instance and returns ID
-    * `Station.delete` => Deletes one instance by ID and returns ID
+    * `Station.delete(id)` => Deletes one instance by ID and returns ID
   * `Route`
     * `Route.new(hash_of_attrs_and_values)` => Returns unsaved instance
     * `Route#save` => Returns saved instance

@@ -1,6 +1,5 @@
 class Station
-  # what are all the stations > station objects
-  # doing queries, find by station name > station object
+  
 end
 
 # station1 = Station.new(name, line, 'IRT', latitude, longitude)
