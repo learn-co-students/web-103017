@@ -1,9 +1,7 @@
 class Station
-
   attr_accessor :name, :line, :division, :latitude, :longitude
   attr_reader :id
 
-  # mass assignment
   def initialize(attributes)
     @id = nil
     self.send(:mass_assign_attributes, attributes)
@@ -105,7 +103,7 @@ class Station
   end
 
   def self.new_from_row(station_row)
-    station = Station.new(station_row)
+    station = self.new(station_row)
     station.instance_variable_set(:@id, station_row["id"])
     station
   end
