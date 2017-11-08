@@ -7,7 +7,6 @@ require 'sqlite3'
 DB = {}
 DB[:conn] = SQLite3::Database.new('db/subway.db')
 DB[:conn].results_as_hash = true
-# [{name: 'asd', division: 'asdf', ...}, ...]
 
 # loading my application code
 require_relative '../app/models/route.rb'

@@ -49,3 +49,22 @@
     * `Route#stops` => Returns list of stop instances for station
     * `Route#add_stop(station)` => Creates a stop instance for route and station and persists relationship
     * `Route#stations` => Returns unique list of stations for routes
+
+
+```ruby
+attributes = name: 'tim', line: 'fulton', division: 'mine', latitude: 123.4, longitude: 234.3
+s = Station.new(attributes)
+s.save
+station_id = s.id
+s.update(name: 'tom')
+Station.find(station_id).name == s.name
+s.line = 'my line'
+Station.find(station_id).line != s.line
+s.save
+Station.find(station_id).line == s.line
+s.delete
+Station.find(station_id) == nil
+new_s = Station.create(attributes)
+Station.all.last.id == new_s.id
+Station.find_by(attributes) == new_s.id
+```
