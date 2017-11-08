@@ -1,5 +1,20 @@
 class GenericModel
 
+  def self.has_many(class)
+    # creating methods
+    # station h_m stops
+    # s = Station.find(1)
+    # s.stops
+  end
+
+  def self.belongs_to(class)
+    # creating methods for me
+    # stop b_t station
+    # s = Stop.find(1)
+    # s.station
+    # s.route
+  end
+
   # create a table
   # drop the table
 
