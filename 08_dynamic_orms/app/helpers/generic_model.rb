@@ -1,26 +1,7 @@
 class GenericModel
 
-  def self.has_many(class)
-    # creating methods
-    # station h_m stops
-    # s = Station.find(1)
-    # s.stops
-  end
-
-  def self.belongs_to(class)
-    # creating methods for me
-    # stop b_t station
-    # s = Stop.find(1)
-    # s.station
-    # s.route
-  end
-
-  # create a table
-  # drop the table
-
   attr_reader :id
 
-  # inside of here, we'll move our more generic code
   def initialize(attributes)
     @id = nil
     self.send(:mass_assign_attributes, attributes)
@@ -39,68 +20,119 @@ class GenericModel
     self.send(:delete_record)
   end
 
+  def self.has_many(relationship, options = {})
+    define_method(relationship.to_sym) do
+      if options.empty?
+        sql = <<-SQL
+          SELECT #{relationship}.*
+          FROM #{self.class.table_name}
+          JOIN #{relationship}
+              ON #{relationship}.#{self.class.foreign_key} = #{self.class.table_name}.id
+          WHERE #{self.class.table_name}.id = #{self.id}
+        SQL
+      elsif !options[:through].nil?
+        through = options[:through]
+        sql = <<-SQL
+          SELECT #{relationship}.*
+          FROM #{self.class.table_name}
+          JOIN #{through}
+            ON #{through}.#{self.class.foreign_key} = #{self.class.table_name}.id
+          JOIN #{relationship}
+            ON #{through}.#{relationship[0...-1]}_id = #{relationship}.id
+          WHERE #{self.class.table_name}.id = #{self.id}
+        SQL
+      end
+
+      instances = DB[:conn].execute(sql).map do |row|
+        relationship_class_name = relationship[0...-1].capitalize
+        klass = Object.const_get(relationship_class_name)
+        self.class.new_from_row(row, klass)
+      end
+    end
+  end
+
+  def self.belongs_to(relationship)
+    define_method(relationship.to_sym) do
+      foreign_key_value = self.send(:"#{relationship}_id")
+      sql = <<-SQL
+        SELECT DISTINCT #{relationship}s.*
+        FROM #{self.class.table_name}
+        JOIN #{relationship}s
+          ON #{self.class.table_name}.#{relationship}_id = #{relationship}s.id
+        WHERE #{relationship}s.id = #{foreign_key_value}
+      SQL
+
+      instance = DB[:conn].execute(sql).map do |row|
+        relationship_class_name = relationship.capitalize
+        klass = Object.const_get(relationship_class_name)
+        self.class.new_from_row(row, klass)
+      end.first
+    end
+  end
+
   def self.create(attributes)
-    new_instance = self.new(attributes)
-    new_instance.save
+    self.new(attributes).save
   end
 
   def self.table_name
     self.to_s.downcase + "s"
   end
 
+  def self.foreign_key
+    self.to_s.downcase + "_id"
+  end
+
   def self.all
-    rows = DB[:conn].execute("SELECT * FROM #{self.table_name}")
-    # we need to create instances
-    rows.map do |row|
-      self.send(:new_from_row, row)
-    end
+    sql = "SELECT * FROM #{self.table_name}"
+
+    rows = DB[:conn].execute(sql)
+    rows.map { |row| self.send(:new_from_row, row) }
   end
 
   def self.find(id)
-    row = DB[:conn].execute("SELECT * FROM #{self.table_name} WHERE id = ?", id)[0]
-    if row
-      self.send(:new_from_row, row)
-    end
+    sql = "SELECT * FROM #{self.table_name} WHERE id = ?"
+
+    row = DB[:conn].execute(sql, id)[0]
+    self.send(:new_from_row, row) if row
   end
 
   def self.find_by(attributes)
     conditions = conditions_from_hash(attributes, " AND ")
     values = attributes.values
-    sql = <<-SQL
-      SELECT * from #{self.table_name}
-      WHERE #{conditions}
-    SQL
+    sql = "SELECT * from #{self.table_name} WHERE #{conditions}"
+
     row = DB[:conn].execute(sql, *values)[0]
-    if row
-      self.send(:new_from_row, row)
-    end
+    self.send(:new_from_row, row) if row
   end
 
   def self.delete(id)
-    instance = self.find(id)
-    instance.delete
+    self.find(id).delete
   end
 
   def self.column_names
-    # table_name = "stations"
     sql = "PRAGMA table_info('#{self.table_name}')"
 
-    cols = DB[:conn].execute(sql).map do |hsh|
-      hsh["name"]
-    end
+    cols = DB[:conn].execute(sql).map { |hsh| hsh["name"] }
     cols.delete("id")
     cols
   end
 
   def self.inherited(childclass)
-    binding.pry
+    childclass.column_names.each { |name| attr_accessor name.to_sym }
+  end
 
-    childclass.column_names.each do |name|
-      attr_accessor name.to_sym
-    end
+  def self.new_from_row(row, klass = self)
+    instance = klass.new(row)
+    instance.instance_variable_set(:@id, row["id"])
+    instance
+  end
+
+  def self.conditions_from_hash(attributes, delimeter)
+    attributes.inject([]) { |acc, (k,_)| acc.push("#{k} = ?") }.join(delimeter)
   end
 
   private
+
 
   def mass_assign_attributes(attributes)
     attributes.each do |k, v|
@@ -109,6 +141,10 @@ class GenericModel
         self.send(setter_method, v)
       end
     end
+  end
+
+  def last_insert_row_id
+    DB[:conn].execute("SELECT last_insert_rowid() FROM #{self.class.table_name}")[0][0]
   end
 
   def insert_record
@@ -121,49 +157,27 @@ class GenericModel
       VALUES (#{question_marks})
     ANYTHING
 
-
     DB[:conn].execute(sql, *values)
-    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{self.class.table_name}")[0][0]
+    @id = self.send(:last_insert_row_id)
     self
   end
 
   def update_record
     values = self.class.column_names.map { |name| self.send(name.to_sym) }
     columns_and_values = self.class.column_names.zip(values)
-    attributes = Hash[conditions]
-    conditions = self.class.conditions_from_hash(attributes)
-
-    sql = <<-SQL
-      UPDATE #{self.table_name}
-      SET name = #{conditions}
-      WHERE id = ?
-    SQL
+    attributes = Hash[columns_and_values]
+    conditions = self.class.conditions_from_hash(attributes, ", ")
+    sql = "UPDATE #{self.class.table_name} SET #{conditions} WHERE id = ?"
 
     DB[:conn].execute(sql, *values, self.id)
     self
   end
 
   def delete_record
-    sql = <<-SQL
-      DELETE FROM stations
-      WHERE id = ?
-    SQL
+    sql = "DELETE FROM stations WHERE id = ?"
 
     DB[:conn].execute(sql, self.id)
     @id = nil
     self
-  end
-
-  def self.new_from_row(row)
-    station = self.new(row)
-    station.instance_variable_set(:@id, row["id"])
-    station
-  end
-
-  def self.conditions_from_hash(attributes, delimeter)
-    # "name = 'Tim' AND age = '40'"
-    attributes.inject([]) do |acc, (k,v)|
-      acc.push("#{k} = ?")
-    end.join(delimeter)
   end
 end
