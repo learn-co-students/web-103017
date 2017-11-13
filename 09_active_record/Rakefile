@@ -1,4 +1,7 @@
+# require all my app code and setup
 require_relative './config/environment'
+
+# define what I can do from the command line
 require 'sinatra/activerecord/rake'
 
 desc "Open a pry session"
