@@ -23,13 +23,13 @@ o3 = Order.create(customer: c2, discount: 0.2)
 o4 = Order.create(customer: c3, discount: 0.2)
 o5 = Order.create(customer: c4, discount: 0.2)
 
-o1.order_items << p1
-o1.order_items << p2
-o2.order_items << p3
-o3.order_items << p4
-o4.order_items << p5
-o4.order_items << p6
-
-c1.purchases
-c1.pending_purchases
-c1.shipped_purchases
+o1.items << p1 # we don't have item class
+o1.items << p2 # there's a type mismatch
+o2.items << p3
+o3.items << p4
+o4.items << p5
+o4.items << p6
+#
+# c1.purchases
+# c1.pending_purchases
+# c1.shipped_purchases
