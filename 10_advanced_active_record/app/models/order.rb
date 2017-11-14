@@ -16,5 +16,6 @@ class Order < ActiveRecord::Base
   # order.items << p1
   # when do i create the order_item instance for that rel?
   has_many :items, through: :order_items, class_name: 'Product'
+  
   # has_many :items, :through => :order_items, :class_name => 'Product'
 end
