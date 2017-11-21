@@ -13,6 +13,11 @@ class ApplicationController < Sinatra::Base
   
   # Controller
   
+  
+  
+  # INDEX | GET /books | Book.all
+
+  
   get "/books" do
     # get all books 
     # Speaks to our model 
@@ -21,14 +26,55 @@ class ApplicationController < Sinatra::Base
     erb :"books/index"
   end
   
+  
+  # CREATE | POST /books | Book.create()
+  
   post "/books" do
-    @book = Book.create(params[:title], params[:author])
+    binding.pry
+    @book = Book.create(params)
     redirect "/books"
+    # redirect "/books"
 
   end
   
+  
+  
+  # NEW | GET /books/new | 
+
+  
   get "/books/new" do
     erb :"books/new"
+  end
+  
+  
+  # SHOW | GET /books/:id | 
+  
+  # for eg books/1  books/2
+  
+  
+  # twitter.com/iloveflatiron
+  # "/:username"
+  # :username 
+  get "/books/:id" do
+    @book = Book.find(params[:id])
+    erb :"books/show"
+  end
+  
+  
+  
+  get "/books/:id/edit" do
+    @book = Book.find(params[:id])
+    erb :"books/edit"
+    
+    
+  end
+  
+  
+  patch "/books/:id" do
+    binding.pry
+    # we should get some data from the form 
+    # lets grab the original from the db 
+    # lets update and save 
   end
   
   
