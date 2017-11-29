@@ -1,28 +1,28 @@
 # Further Forms & Validations
 
 
-## Objectives 
+## Objectives
 
-1. Discuss and Review Forms 
+1. Discuss and Review Forms
 2. Strong params
-3. Checking information before creating 
+3. Checking information before creating
 
 
-## Prerequisites 
+## Prerequisites
 A student should be able to:
 1. Set up their own routes
-2. Create a form using form_for 
-3. Create their own models 
+2. Create a form using form_for
+3. Create their own models
 
 
 # Instructions
-1. Create a new appication 
+1. Create a new appication
   `rails new docoffice`
-2. Create a new model Doctor 
-  `rails g model Doctor name speciality`
+2. Create a new model Doctor
+  `rails g model Doctor name speciality registraion_number:integer`
 3. Create a new model Patient
   `rails g model Patient name condition`
-4. Create the routes for both 
+4. Create the routes for both
     - You may use the `resources` keyword but use the `only` keyword to define only the actions you will be using
 5.  Create your controllers
 ```
@@ -30,47 +30,49 @@ A student should be able to:
 class DoctorController < ApplicationController
   def index
     @doctors = Doctor.all
-  end 
-  
-  
-  def show 
+  end
+
+
+  def show
     @doctor = Doctor.find(params[:id]
-  end 
-  
-  
-  def new 
+  end
+
+
+  def new
     @doctor = Doctor.new
   end
-  
-  
+
+
   def create
-    @doctor = Doctor.create(name: params[:doctor][:name], speciality: params[:doctor][:speciality])
-  end 
-  
+    @doctor = Doctor.create(name: params[:doctor][:name], speciality: params[:doctor][:speciality], registration_number: params[:doctor][:registration_number])
+  end
+
   def edit
     @doctor = Doctor.find(params[:id])
-  end 
-  
-  
-  def update 
+  end
+
+
+  def update
     @doctor = Doctor.find(params[:id])
-    @doctor.update(name: params[:doctor][:name], speciality: params[:doctor][:speciality])
-  end 
+    @doctor.update(name: params[:doctor][:name], speciality: params[:doctor][:speciality], registration_number: params[:doctor][:registration_number])
+  end
 end
 
 ```
-6. Create your corresponding views 
- 
+6. Create your corresponding views
+
   `new.html.erb`
 ```
   <%= form_for @doctor do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
-    
-    
+
+
     <%= f.label :speciality %>
     <%= f.text_field :speciality %>
-    
+    <%= f.label :registration_number %>
+    <%= f.text_field :registration_number %>
+
     <%= f.submit %>
   <% end %>
 
@@ -89,9 +91,9 @@ end
 `song.rb`
 
 ```
-class Song < ApplicationRecord
+class Doctor < ApplicationRecord
   validates :title, presence: :true
-  validates :runtime, numericality: { greater_than_or_equal_to: 1}
+  validates :registration_number, length: { is: 6 }
 end
 
 ```
@@ -101,19 +103,19 @@ end
 
 ```
   def create
-    
-    @doctor = Doctor.new(name: params[:doctor][:name], speciality: params[:doctor][:speciality])
+
+    @doctor = Doctor.new(name: params[:doctor][:name], speciality: params[:doctor][:speciality], registration_number:params[:doctor][:registration_number])
     if @doctor.valid?
       @doctor.save
-    else 
+    else
       render 'new'
     end
-  end 
+  end
 
 
 ```
 
-9. Mass Assignment 
+9. Mass Assignment
 
 
 At the bottom of `doctors_controller.rb`
@@ -121,8 +123,8 @@ At the bottom of `doctors_controller.rb`
 ```
   private
     def doctor_params
-      params.require(:doctor).permit(:name, :speciality)
-    end 
+      params.require(:doctor).permit(:name, :speciality, :registration_number)
+    end
   end
 ```
 
@@ -132,10 +134,10 @@ At the bottom of `doctors_controller.rb`
     @doctor = Doctor.new(doctor_params)
     if @doctor.valid?
       @doctor.save
-    else 
+    else
       render 'new'
     end
-  end 
+  end
 
 ```
 
