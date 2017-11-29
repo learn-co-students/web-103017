@@ -15,6 +15,7 @@ class DoctorsController < ApplicationController
   end 
   
   def create
+    byebug
     @doctor = Doctor.new(doctor_params)
     if @doctor.valid? 
       @doctor.save 

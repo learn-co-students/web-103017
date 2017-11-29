@@ -2,8 +2,10 @@
 
 one:
   name: MyString
+  condition: MyString
   doctor: one
 
 two:
   name: MyString
+  condition: MyString
   doctor: two
