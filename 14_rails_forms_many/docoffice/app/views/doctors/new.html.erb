@@ -1,0 +1,19 @@
+<%= form_for @doctor do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :speciality %>
+  <%= f.text_field :speciality %>
+  <%= f.label :registration_number %>
+  <%= f.text_field :registration_number %>
+  <hr />
+  <div>
+    <%= f.collection_check_boxes :patient_ids, Patient.all, :id, :name %>
+  </div>
+
+  <hr />
+
+  <div>
+  </div>
+  <hr />
+  <%= f.submit %>
+<% end %>
