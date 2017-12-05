@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
 
+  skip_before_action :authorized, only: [:new, :create]
   def create
     @user = User.new(user_params)
     if @user.valid?
       @user.save
-      redirect_to user_path(@user)
+      session[:user_id] = @user.id
+      redirect_to books_path
     else
       render 'new'
     end
@@ -17,6 +19,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+
+
+  def books
   end
 
 
