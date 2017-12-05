@@ -1,0 +1,12 @@
+<%= form_for @restaurant do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  
+  <%= f.label :cuisine_type %>
+  <%= f.text_field :cuisine_type %>
+  <br />
+  
+  <%= f.collection_check_boxes :critic_ids, @critics, :id, :name %>
+  <%= f.submit %>
+
+<% end %>

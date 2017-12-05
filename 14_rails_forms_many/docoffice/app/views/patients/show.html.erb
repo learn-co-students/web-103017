@@ -1,2 +1,19 @@
 <h1><%= @patient.name %> </h1>
-<p>Physician: Dr. <%= @patient.doctor.name %></p>
+
+<ul>
+  <% @patient.doctors.each do |doctor| %>
+    <li><%= doctor.name %>
+      <ul>
+        <% doctor.appointments_for(@patient).each do |apt| %>
+          <li><%= apt.time %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+
+
+
+</ul>
+
+
+<p>Next Appointment <%= @patient.appointments.last.time %> | <%= @patient.appointments.last.doctor.name %></p>

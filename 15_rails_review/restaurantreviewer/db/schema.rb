@@ -10,31 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130160821) do
+ActiveRecord::Schema.define(version: 20171201201302) do
 
-  create_table "appointments", force: :cascade do |t|
-    t.datetime "time"
-    t.integer "doctor_id"
-    t.integer "patient_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
-    t.index ["patient_id"], name: "index_appointments_on_patient_id"
-  end
-
-  create_table "doctors", force: :cascade do |t|
+  create_table "critics", force: :cascade do |t|
     t.string "name"
-    t.string "speciality"
-    t.integer "registration_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "patients", force: :cascade do |t|
+  create_table "restaurants", force: :cascade do |t|
     t.string "name"
-    t.string "condition"
+    t.string "cuisine_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "content"
+    t.integer "critic_id"
+    t.integer "restaurant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["critic_id"], name: "index_reviews_on_critic_id"
+    t.index ["restaurant_id"], name: "index_reviews_on_restaurant_id"
   end
 
 end
