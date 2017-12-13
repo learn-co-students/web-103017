@@ -1,0 +1,18 @@
+# `this` and Object Creation
+* Object literals
+* `this`
+  * global context
+  * function context
+* Calling functions
+  * Baseless
+  * Method
+  * `call` and `apply`
+  * Bound functions `bind`
+  * Constructor function
+* Object creation
+  * Object literals
+  * Object literals with methods
+  * Shared methods
+  * Object factories
+  * Constructors
+  * `class` syntax
