@@ -1,6 +1,6 @@
 # `this` and Object Creation
 * Object literals
-* `this`
+* `this` (execution context: how the function was called)
   * global context
   * function context
 * Calling functions
@@ -16,3 +16,6 @@
   * Object factories
   * Constructors
   * `class` syntax
+  * Private members with closures
+  * Associations
+* Arrow functions
