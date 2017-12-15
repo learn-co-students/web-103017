@@ -15,8 +15,6 @@
 
 // * Object factories
 // function greet(name) { console.log('hi', name, ' -', this.name) }
-// const andrew = {name: 'Andrew', age: 25, greet: greet}
-// const howard = {name: 'Howard', age: 20, greet: greet}
 
 // function userFactory(name, age) {
 //   const obj = {} // no reassignment, are mutable
@@ -47,7 +45,15 @@
 // const howard = userFactory('Howard', 20)
 
 
-// * Constructors
+// // REDEFINING THE NEW KEYWORD AS A FUNCTION
+// function myNew(constructor, ...args) {
+//   const obj = Object.create(constructor.prototype)
+//   constructor.apply(obj, args)
+//   return obj
+// }
+//
+//
+// // * Constructors
 // function User(name, age) {
 //   // Instance variables
 //   this.name = name
