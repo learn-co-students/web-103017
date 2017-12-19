@@ -9,7 +9,6 @@ class Adapter {
           throw Error(response.statusText);
         }
       })
-      // .then(res => {res.ok ? return res.json() : throw res})
       .then(pokemonJSON =>
         pokemonJSON.forEach(pokemonData => new Pokemon(pokemonData))
       )
