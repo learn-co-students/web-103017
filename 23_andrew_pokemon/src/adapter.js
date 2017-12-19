@@ -1,24 +1,18 @@
 class Adapter {
-  fetchAndSetPokemon() {
+  static fetchAndSetPokemon() {
+    //static creates a class method that we can call without instantiating Adapter––Adapter.fetchAndSetPokemon()
     fetch("http://localhost:3000/pokemons")
-      .then(r => r.json())
-      //pokemonJSON.forEach(pokemon => const p = new Pokemon(pokemon))
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw Error(response.statusText);
+        }
+      })
+      // .then(res => {res.ok ? return res.json() : throw res})
       .then(pokemonJSON =>
         pokemonJSON.forEach(pokemonData => new Pokemon(pokemonData))
-      );
+      )
+      .catch(err => console.error("Something went wrong", err));
   }
 }
-//
-// etch("/api/foo")
-//   .then( response => {
-//     if (!response.ok) { throw response }
-//     return response.json()  //we only get here if there is no error
-//   })
-//   .then( json => {
-//     this.props.dispatch(doSomethingWithResult(json))
-//   })
-//   .catch( err => {
-//     err.text().then( errorMessage => {
-//       this.props.dispatch(displayTheError(errorMessage))
-//     })
-//   })

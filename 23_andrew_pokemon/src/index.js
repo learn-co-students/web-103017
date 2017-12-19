@@ -24,8 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   //instantiate adapter && save fetch pokemon from DB && save in JS memory as Pokemon.all array
-  let adapter = new Adapter();
-  adapter.fetchAndSetPokemon();
+  // let adapter = new Adapter();
+  //by creating a `static` or class method on the Adapter class, we no longer need to instantiate it
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static
+  Adapter.fetchAndSetPokemon();
   // fn that handles fetched data
 
   //when app first mounts what do we want to do?
