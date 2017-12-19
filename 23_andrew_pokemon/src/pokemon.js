@@ -6,7 +6,7 @@ class Pokemon {
     this.name = pokemonData.name;
     this.height = pokemonData.height;
     this.abilities = pokemonData.abilities;
-    this.id = pokemonData.order; //this id points to the id from db
+    this.id = pokemonData.id; //this id points to the id from db
     this.flipped = false;
     this.allSprites = pokemonData.sprites
     this.sprite = pokemonData.sprites.front;

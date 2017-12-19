@@ -1,3 +1,4 @@
+//TODO: notes about responsibility of each file && posting to backend
 class Adapter {
   static fetchAndSetPokemon() {
     //static creates a class method that we can call without instantiating Adapter––Adapter.fetchAndSetPokemon()
