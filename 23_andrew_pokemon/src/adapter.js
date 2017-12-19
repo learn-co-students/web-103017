@@ -2,7 +2,7 @@
 class Adapter {
   static fetchAndSetPokemon() {
     //static creates a class method that we can call without instantiating Adapter––Adapter.fetchAndSetPokemon()
-    fetch("http://localhost:3000/pokemons")
+    return fetch("http://localhost:3000/pokemons")
       .then(res => {
         if (res.ok) {
           return res.json();
@@ -10,9 +10,6 @@ class Adapter {
           throw Error(response.statusText);
         }
       })
-      .then(pokemonJSON =>
-        pokemonJSON.forEach(pokemonData => new Pokemon(pokemonData))
-      )
       .catch(err => console.error("Something went wrong", err));
   }
 
@@ -36,6 +33,6 @@ class Adapter {
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
         },
       }),
-    });
+    }).then(r => r.json());
   }
 }
