@@ -4,15 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //request data from our API, which has been moved into an adapter class whose sole responsibility is communicating with the server. If there is a change to the API or any of our endpoints, we know exactly where to look if code needs to be updated
   Adapter.fetchAndSetPokemon(); //by creating a `static` or class method on the Adapter class, we no longer need to instantiate it––https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static
-
   //select our DOM elements
-  let searchTerm = ""; //declare a variable to keep track of whatever the user typed in
+  // let searchTerm = ""; //declare a variable to keep track of whatever the user typed in
   const pokemonContainer = document.getElementById("pokemon-container"); //the container where we will append elements
   const searchInput = document.getElementById("pokemon-search-input"); //input field user types their term into
-  searchInput.addEventListener("keydown", e => {
-    //TODO: fix the bug when user types backspace
-    //iterate through Pokemon.all, see if we have any matches
-    searchTerm += e.key;
+  searchInput.addEventListener("input", e => {
+    const searchTerm = e.target.value.trim();
+    console.log(searchTerm);
+    // searchTerm += e.key; we can use e.target.value now to update searchTerm everytime the user types something
 
     //this variable will save a filtered copy of our Pokemon.all array; TODO: could this be moved somewhere else?
     const filteredPokemon = Pokemon.all.filter(pokemon =>
