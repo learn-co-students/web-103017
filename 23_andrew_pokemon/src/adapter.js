@@ -1,4 +1,5 @@
 //TODO: notes about responsibility of each file && posting to backend
+/*The adapter class has the sole responsibility of communicating with our backend. In the event that one of our endpoints changes or we want to the ability to make more requests to the backend, keeping all of that code in one place makes it easy to update and troubleshoot any issues with our requests*/
 class Adapter {
   static fetchAndSetPokemon() {
     //static creates a class method that we can call without instantiating Adapter––Adapter.fetchAndSetPokemon()
