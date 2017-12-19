@@ -7326,6 +7326,63 @@
         "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
         "back": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/151.png"
       }
+    },
+    {
+      "height": 10,
+      "weight": 130,
+      "name": "bulbasaur",
+      "abilities": [
+        "overgrow",
+        "chlorophyll"
+      ],
+      "moves": [],
+      "stats": [],
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "sprites": {
+        "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+      },
+      "id": 207
+    },
+    {
+      "height": 10,
+      "weight": 130,
+      "name": "bulbasaur",
+      "abilities": [
+        "overgrow",
+        "chlorophyll"
+      ],
+      "moves": [],
+      "stats": [],
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "sprites": {
+        "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+      },
+      "id": 208
+    },
+    {
+      "height": 10,
+      "weight": 130,
+      "name": "bulbasaur",
+      "abilities": [
+        "overgrow",
+        "chlorophyll"
+      ],
+      "moves": [],
+      "stats": [],
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "sprites": {
+        "front": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+      },
+      "id": 209
     }
   ]
 }
