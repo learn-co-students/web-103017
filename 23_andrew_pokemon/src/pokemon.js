@@ -7,15 +7,25 @@ class Pokemon {
     this.height = pokemonData.height;
     this.abilities = pokemonData.abilities;
     this.id = pokemonData.order; //this id points to the id from db
-    this.sprites = pokemonData.sprites;
+    this.flipped = false;
+    this.allSprites = pokemonData.sprites
+    this.sprite = pokemonData.sprites.front;
     //what we did before this.id = ++id,
     Pokemon.all.push(this);
     //create our new pokemon
   }
+
+  flipPokemon(img) {
+    this.flipped = !this.flipped
+    this.sprite = this.flipped ? this.allSprites.back : this.allSprites.front;
+    img.src = this.sprite
+  }
+
   render() {
     return `<div>
       <p>${this.name}</p>
-      <img src="${this.sprites.front}" />
+      <img data-id="${this.id}" src="${this.sprite}" />
+      <button data-id="${this.id}" name="flip-pokemon">FlipIt™️</button>
       </div>`;
   }
 }
