@@ -15,25 +15,23 @@ class Adapter {
   }
 
   static createNewPokemon(pokemonData) {
-    //TODO:creating a method to demonstrate request/response cycle; will integrate later
+    //eventually pokemonData will be something the user typed into a form
     return fetch("http://localhost:3000/pokemons", {
+      //because we are returning, we can call Adapter.createNewPokemon() and call .then on it elsewhere in the code
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        height: 10,
-        weight: 130,
-        name: "bulbasaur",
-        abilities: ["overgrow", "chlorophyll"],
-        moves: [],
-        stats: [],
-        types: ["grass", "poison"],
-        sprites: {
-          front:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-        },
-      }),
-    }).then(r => r.json());
+      body: JSON.stringify(pokemonData),
+    })
+      .then(res => {
+        //handle any errors
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw Error(response.statusText);
+        }
+      })
+      .catch(err => console.err("Failed to create new pokemon", err));
   }
 }

@@ -21,3 +21,27 @@ function handleSearchInput(event, pokemonContainer) {
     .map(pokemon => pokemon.render())
     .join(""); //update the DOM by resetting the innerHTML based on our filteredPokemon list; each instance of pokemon has a .render() method that generates a string of HTML. .map() returns an array that we can .join("") in order to create a large string of HTML
 }
+
+function handleNewPokemon(pokemonData) {
+  //at the moment, we are hard-coding the pokemon data but we can imagine changing this to pass data from a form to the backend. The important aspect that I want to focus on is sending data to the backend, getting a response back, and using that response to instantiate a new pokemon
+
+  pokemonData = {
+    height: 10,
+    weight: 130,
+    name: "bulbasaur",
+    abilities: ["overgrow", "chlorophyll"],
+    moves: [],
+    stats: [],
+    types: ["grass", "poison"],
+    sprites: {
+      front:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      back:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+    },
+  };
+
+  Adapter.createNewPokemon(pokemonData).then(
+    newPokeJSON => new Pokemon(newPokeJSON)
+  );
+}

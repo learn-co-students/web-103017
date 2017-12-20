@@ -19,4 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", event =>
     handleSearchInput(event, pokemonContainer)
   ); //look closely at what's happening here; .addEventListener() accepts a function as its second argument. we've moved handleSearchInput to a separate file, which introduces a problem: handleSearchInput needs to know which piece of the DOM needs to be updated. We can fix this by passing .addEventListener an anonymous callback that will invoke handleSearchInput ONLY when the input event occurs. Walk through this a few times and make sure it's clear to you. What would happen if we did this: searchInput.addEventListener("input", handleSearchInput(event, pokemonContainer))
+
+  const createPokemon = document.getElementById("create-pokemon");
+  createPokemon.addEventListener("click", handleNewPokemon); //this button demonstrates the request response cycle; currently it posts some hard-coded data to our backend which responds with the newly created pokemon. We can imagine updating this method to accept pokemon data from a form. for now, just focus on sending data to the backend and getting something back
 });
