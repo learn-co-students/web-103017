@@ -15,7 +15,7 @@ class Adapter {
   }
 
   static createNewPokemon(pokemonData) {
-    //creating a method to demonstrate request/response cycle; will integrate later
+    //TODO:creating a method to demonstrate request/response cycle; will integrate later
     return fetch("http://localhost:3000/pokemons", {
       method: "POST",
       headers: {

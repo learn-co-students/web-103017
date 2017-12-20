@@ -4,23 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //request data from our API, which has been moved into an adapter class whose sole responsibility is communicating with the server. If there is a change to the API or any of our endpoints, we know exactly where to look if code needs to be updated
   Adapter.fetchAndSetPokemon().then(pokemonData =>
-    pokemonData.forEach(pokemon => {
-      new Pokemon(pokemon);
-    })
+    pokemonData.forEach(pokemon => new Pokemon(pokemon))
   ); //by creating a `static` or class method on the Adapter class, we no longer need to instantiate it––https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static
   //select our DOM elements
   // let searchTerm = ""; //declare a variable to keep track of whatever the user typed in
   const pokemonContainer = document.getElementById("pokemon-container"); //the container where we will append elements
-  pokemonContainer.addEventListener("click", e => {
-    if (e.target.name === "flip-pokemon") {
-      const targetId = parseInt(e.target.dataset.id);
-      const targetPokemon = Pokemon.all.find(
-        pokemon => pokemon.id === targetId
-      );
-      const targetImg = document.querySelector(`img[data-id="${targetId}"]`);
-      targetPokemon.flipPokemon(targetImg);
-    }
-  });
+  pokemonContainer.addEventListener("click", handleSpriteToggle); //handleSpriteToggle is an event handler function; we know that .addEventListener will always pass the event object to its handler. therfore, if handleSpriteToggle accepts event as an arg, we can define it elsewhere and pass a reference to the function
 
   const searchInput = document.getElementById("pokemon-search-input"); //input field user types their term into
   searchInput.addEventListener("input", e => {
