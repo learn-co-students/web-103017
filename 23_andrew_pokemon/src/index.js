@@ -12,18 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   pokemonContainer.addEventListener("click", handleSpriteToggle); //handleSpriteToggle is an event handler function; we know that .addEventListener will always pass the event object to its handler. therfore, if handleSpriteToggle accepts event as an arg, we can define it elsewhere and pass a reference to the function
 
   const searchInput = document.getElementById("pokemon-search-input"); //input field user types their term into
-  searchInput.addEventListener("input", e => {
-    const searchTerm = e.target.value.trim();
-    // console.log(searchTerm);
-    // searchTerm += e.key; we can use e.target.value now to update searchTerm everytime the user types something
-
-    //this variable will save a filtered copy of our Pokemon.all array; TODO: could this be moved somewhere else?
-    const filteredPokemon = Pokemon.all.filter(pokemon =>
-      pokemon.name.includes(searchTerm)
-    );
-
-    pokemonContainer.innerHTML = filteredPokemon
-      .map(pokemon => pokemon.render())
-      .join(""); //update the DOM by resetting the innerHTML based on our filteredPokemon list
-  });
+  searchInput.addEventListener("input", event =>
+    handleSearchInput(event, pokemonContainer)
+  ); //look closely at what's happening here; .addEventListener() accepts a function as its second argument. we've moved handleSearchInput to a separate file, which introduces a problem: handleSearchInput needs to know which piece of the DOM needs to be updated. We can fix this by passing .addEventListener an anonymous callback that will invoke handleSearchInput ONLY when the input event occurs. Walk through this a few times and make sure it's clear to you. What would happen if we did this: searchInput.addEventListener("input", handleSearchInput(event, pokemonContainer))
 });

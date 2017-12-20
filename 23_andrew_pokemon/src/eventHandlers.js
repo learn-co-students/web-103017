@@ -8,3 +8,16 @@ function handleSpriteToggle(event) {
     targetPokemon.flipPokemon(targetImg);
   }
 }
+
+function handleSearchInput(event, pokemonContainer) {
+  //event is the "input" event
+  const searchTerm = event.target.value.trim(); //grab whatever the user typed in and .trim() off any extra spaces
+
+  const filteredPokemon = Pokemon.all.filter(pokemon =>
+    pokemon.name.includes(searchTerm)
+  ); //grab a filtered list of pokemon that match the user's search term
+
+  pokemonContainer.innerHTML = filteredPokemon
+    .map(pokemon => pokemon.render())
+    .join(""); //update the DOM by resetting the innerHTML based on our filteredPokemon list; each instance of pokemon has a .render() method that generates a string of HTML. .map() returns an array that we can .join("") in order to create a large string of HTML
+}
