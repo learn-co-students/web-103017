@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const pokemonContainer = document.getElementById("pokemon-container"); //the container where we will append elements
   pokemonContainer.addEventListener("click", handleSpriteToggle); //handleSpriteToggle is an event handler function; we know that .addEventListener will always pass the event object to its handler. therfore, if handleSpriteToggle accepts event as an arg, we can define it elsewhere and pass a reference to the function
 
+  document
+    .getElementById("pokemon-search-form")
+    .addEventListener("submit", e => e.preventDefault()); //stop search form from posting when user presses enter; we could have saved this to a variable as well
+
   const searchInput = document.getElementById("pokemon-search-input"); //input field user types their term into
   searchInput.addEventListener("input", event =>
     handleSearchInput(event, pokemonContainer)
