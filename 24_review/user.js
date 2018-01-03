@@ -35,6 +35,23 @@ const User = (function createUserClass() {
       </form>
       `
     }
+
+    static findById(id) {
+      return allUsers.find(user => user.id === id)
+    }
+
+    static findOrCreateByName(first_name, last_name) {
+      let x // the eventual of either
+      const u = allUsers.find(user => user.first_name === first_name && user.last_name === last_name)
+
+      if (!u) {
+        x = Adapter.createUser(first_name, last_name).then(userData => x = new User(userData))
+      } else {
+        x = Promise.resolve(u)
+      }
+
+      return x
+    }
   }
 
   return User

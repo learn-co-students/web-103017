@@ -1,6 +1,6 @@
-* App class
 * Constructors in IIFEs
 * Event delegation!!!
+* App class
 * `fetch`
   * PATCH (requests with payloads)
   * DELETE
