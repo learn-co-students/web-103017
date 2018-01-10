@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { description: '', priority: '' };
+    this.state = { description: "", priority: "" };
   }
 
   handleSubmit = ev => {
@@ -12,25 +12,19 @@ class TodoForm extends React.Component {
 
     this.props.addTodo(this.state);
 
-    this.setState({ description: '', priority: '' });
+    this.setState({ description: "", priority: "" });
   };
 
-  handleChange = ev => {
-    const value = ev.target.value;
-    const name = ev.target.name;
-    this.setState(prevState => {
-      return { [name]: value };
-    });
+  handleDescriptionChange = event => {
+    this.setState({ description: event.target.value });
   };
 
-  handleChange = (value, field) => {
-    this.setState(prevState => {
-      return { [field]: value };
-    });
+  handlePriorityChange = event => {
+    this.setState({ priority: event.target.value });
   };
 
   render() {
-    console.log('TodoForm is rendering', this.props);
+    console.log("TodoForm is rendering", this.props);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -38,13 +32,13 @@ class TodoForm extends React.Component {
             placeholder="description"
             name="description"
             value={this.state.description}
-            onChange={e => this.handleChange(e.target.value, 'description')}
+            onChange={this.handleDescriptionChange}
           />
           <input
             placeholder="priority"
             name="priority"
             value={this.state.priority}
-            onChange={e => this.handleChange(e.target.value, 'priority')}
+            onChange={this.handlePriorityChange}
           />
           <button type="submit">Add Todo</button>
         </form>
