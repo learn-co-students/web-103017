@@ -1,3 +1,4 @@
+[Here](https://youtu.be/jo_ESjd2pTU) is the [video](https://youtu.be/jo_ESjd2pTU) from [this morning's exercise](https://youtu.be/jo_ESjd2pTU)!  Actual [link](https://youtu.be/jo_ESjd2pTU): [https://youtu.be/jo_ESjd2pTU](https://youtu.be/jo_ESjd2pTU)
 
 A quick extra note:
 
