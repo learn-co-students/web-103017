@@ -6,7 +6,11 @@ const VideoList = props => {
     <VideoItem key={video.etag} video={video} />
   ));
 
-  return <div>{videos}</div>;
+  return (
+    <div className="four wide column">
+      <div className="ui relaxed items">{videos}</div>
+    </div>
+  );
 };
 
 export default VideoList;
