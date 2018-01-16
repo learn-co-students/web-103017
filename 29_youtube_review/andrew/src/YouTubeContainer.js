@@ -1,8 +1,9 @@
 import React from "react";
+import Adapter from "./Adapter";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import SelectedVideo from "./SelectedVideo";
-import API_KEY from "./keys";
+// import API_KEY from "./keys";
 // import _ from 'lodash'
 // const API_KEY = "AIzaSyCUVIg4sQA5eg8huCRYVHJQSfwElOwenoo";
 
@@ -49,14 +50,14 @@ class YouTubeContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=${
-        this.state.term
-      }&type=video`
-    )
+    Adapter.searchVideos(this.state.term)
       .then(res => res.json())
-      .then(console.log);
-    // ADAPTER––get videos
+      .then(youtubeJSON => {
+        this.setState(
+          { selectedVideo: youtubeJSON.items[0], videos: youtubeJSON.items },
+          () => console.log(this.state)
+        );
+      });
   }
 
   handleSearch = (e, term) => {
@@ -84,11 +85,9 @@ class YouTubeContainer extends React.Component {
 
     return (
       <div className="ui grid container">
-        <div className="sixteen wide column">
-          <SearchBar handleSearch={this.handleSearch} term={this.state.term} />
-          <SelectedVideo selectedVideo={this.state.selectedVideo} />
-          <VideoList videos={this.state.videos} />
-        </div>
+        <SearchBar handleSearch={this.handleSearch} term={this.state.term} />
+        <SelectedVideo selectedVideo={this.state.selectedVideo} />
+        <VideoList videos={this.state.videos} />
       </div>
     );
   }
