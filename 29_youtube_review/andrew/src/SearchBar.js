@@ -21,18 +21,26 @@ class SearchBar extends React.Component {
   // }}
   render() {
     return (
-      <form
-        onSubmit={e => this.props.handleSearch(e, this.state.searchInputTerm)}
-      >
-        <input
-          onChange={this.handleInputChange}
-          value={this.state.searchInputTerm}
-          refs="searchTerm"
-          id="search-term"
-          type="text"
-        />
-        <button type="submit">SEARCH</button>
-      </form>
+      <div className="ui secondary segment">
+        <div className="ui huge fluid input">
+          <form
+            onSubmit={e =>
+              this.props.handleSearch(e, this.state.searchInputTerm)
+            }
+          >
+            <input
+              onChange={this.handleInputChange}
+              value={this.state.searchInputTerm}
+              refs="searchTerm"
+              id="search-term"
+              type="text"
+            />
+            <button className="ui button" type="submit">
+              SEARCH
+            </button>
+          </form>
+        </div>
+      </div>
     );
   }
 }
