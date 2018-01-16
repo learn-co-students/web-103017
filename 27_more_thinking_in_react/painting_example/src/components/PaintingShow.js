@@ -22,7 +22,6 @@ const PaintingShow = ({ painting }) => {
             <p>{painting.artist.hometown}</p>
           </div>
         </div>
-        <div className="extra content">{painting.museum.name}</div>
       </div>
       <Link to="/paintings" className="ui primary button">
         <i className="left arrow icon" />
