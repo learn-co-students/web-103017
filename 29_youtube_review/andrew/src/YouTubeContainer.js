@@ -14,37 +14,7 @@ class YouTubeContainer extends React.Component {
 
     this.state = {
       term: "puppies",
-      videos: [
-        {
-          etag: '"m2yskBQFythfE4irbTIeOgYYfBU/XoCknp0EO0YWZcuTVD_GhkJp_-M"',
-          id: { kind: "youtube#video", videoId: "KMZ7oOCXfP8" },
-          snippet: {
-            title:
-              "Super Smart Dolphin Answers Questions - Extraordinary Animals - Earth",
-            description:
-              "The Echo Location Visualization and Interface System (ELVIS) allows Dolphins to make choices and answer questions. Luna the young Dolphin grasped the ...",
-            thumbnails: {
-              default: {
-                url: "https://i.ytimg.com/vi/KMZ7oOCXfP8/default.jpg",
-              },
-            },
-          },
-        },
-        {
-          etag: '"m2yskBQFythfE4irbTIeOgYYfBU/z_l0ThWRPFnv9um1eRM_O1LVUqU"',
-          id: { kind: "youtube#video", videoId: "3Bk6VPWGi1o" },
-          snippet: {
-            title: 'The Complete 2016 SeaWorld "Blue Horizons" Dolphin Show',
-            description:
-              "Please SUBSCRIBE by clicking here: http://www.youtube.com/subscription_center?add_user=MoneySavingVideos To see my entire SeaWorld playlist click ...",
-            thumbnails: {
-              default: {
-                url: "https://i.ytimg.com/vi/3Bk6VPWGi1o/default.jpg",
-              },
-            },
-          },
-        },
-      ],
+      videos: [],
       selectedVideo: null,
     };
   }
@@ -62,11 +32,15 @@ class YouTubeContainer extends React.Component {
 
   handleSearch = (e, term) => {
     e.preventDefault();
+    Adapter.searchVideos(term)
+      .then(res => res.json())
+      .then(youtubeJSON => {
+        this.setState({
+          selectedVideo: youtubeJSON.items[0],
+          videos: youtubeJSON.items,
+        });
+      });
     this.setState({ term });
-    //{term: term}
-    // TODO: ASK YOUTUBE FOR DATA
-    // ADAPTER.findVideos
-    // fetch()
   };
 
   handleSelectedVideo = etag => {
@@ -75,17 +49,9 @@ class YouTubeContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state);
-    // const searchTerm = "dog";
-    // fetch(
-    //   `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY}&q=${searchTerm}&type=video`
-    // )
-    //   .then(resp => resp.json())
-    //   .then(console.log);
-
     return (
       <div className="ui grid container">
-        <SearchBar handleSearch={this.handleSearch} term={this.state.term} />
+        <SearchBar handleSearch={this.handleSearch} />
         <SelectedVideo {...this.state.selectedVideo} />
         <VideoList
           videos={this.state.videos}
