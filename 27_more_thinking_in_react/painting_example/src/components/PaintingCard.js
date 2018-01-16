@@ -15,10 +15,15 @@ const PaintingCard = props => {
             {props.painting.votes} votes
           </a>
         </div>
-        <div className="content">
-          <div className="ui basic red button">
-            <i className="trash icon" />
-            Delete
+        <div className="extra">
+          <div className="ui big buttons">
+            <div className="ui basic blue button">
+            <i className="add circle icon" />
+              More Info
+            </div>
+            <div className="ui button basic red">
+              <i className="trash icon" />
+            </div>
           </div>
         </div>
       </div>
