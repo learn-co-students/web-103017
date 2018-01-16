@@ -69,8 +69,8 @@ class YouTubeContainer extends React.Component {
     // fetch()
   };
 
-  handleSelectedVideo = videoId => {
-    const selectedVideo = this.state.videos.find(video => video.id === videoId);
+  handleSelectedVideo = etag => {
+    const selectedVideo = this.state.videos.find(video => video.etag === etag);
     this.setState({ selectedVideo });
   };
 
@@ -87,7 +87,10 @@ class YouTubeContainer extends React.Component {
       <div className="ui grid container">
         <SearchBar handleSearch={this.handleSearch} term={this.state.term} />
         <SelectedVideo {...this.state.selectedVideo} />
-        <VideoList videos={this.state.videos} />
+        <VideoList
+          videos={this.state.videos}
+          handleSelectedVideo={this.handleSelectedVideo}
+        />
       </div>
     );
   }
