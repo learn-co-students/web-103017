@@ -86,7 +86,7 @@ class YouTubeContainer extends React.Component {
     return (
       <div className="ui grid container">
         <SearchBar handleSearch={this.handleSearch} term={this.state.term} />
-        <SelectedVideo selectedVideo={this.state.selectedVideo} />
+        <SelectedVideo {...this.state.selectedVideo} />
         <VideoList videos={this.state.videos} />
       </div>
     );
