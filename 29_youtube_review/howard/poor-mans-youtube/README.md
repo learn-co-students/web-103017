@@ -1,3 +1,19 @@
+A quick extra note:
+
+[Lodash](https://lodash.com/) is a library of neat tools we can use for JS apps.  Suppose we want to limit the number of fetch calls to an api, YouTube in our example, because we know too many requests will cause it to stop working.  Here is an example of implementing a lodash method, debounce:
+
+lodash debounce method is a cool feature to add:
+
+//_.debounce is passed a function and an amount of time (n) in milliseconds.
+// it will retunr a copy of the passed in function that can only be called
+// once per n seconds
+
+const videoSearch = _.debounce(term => {
+  this.videoSearch(term);
+}, 200);
+
+// videoSearch is now a function you can pass as the callback prop
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
