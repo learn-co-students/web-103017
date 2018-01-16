@@ -49,6 +49,9 @@ class Navbar extends React.Component {
         </a>
         <div className="right menu">
           <div className="item">
+            Login
+          </div>
+          <div className="item">
             Index
           </div>
           <div className="item">
