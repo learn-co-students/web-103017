@@ -47,9 +47,20 @@ class Navbar extends React.Component {
             <div className="sub header">{this.props.description}</div>
           </h2>
         </a>
-        <div className="right aligned item">
-          <div onClick={this.handleChangeClick} className="ui floated button">
-            Change Color
+        <div className="right menu">
+          <div className="item">
+            Index
+          </div>
+          <div className="item">
+            New
+          </div>
+          <div className="item">
+            About
+          </div>
+          <div className="item">
+            <div onClick={this.handleClick} className="ui button">
+              Change Color
+            </div>
           </div>
         </div>
       </div>
