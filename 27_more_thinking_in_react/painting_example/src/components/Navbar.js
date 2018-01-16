@@ -55,9 +55,6 @@ class Navbar extends React.Component {
             New
           </div>
           <div className="item">
-            About
-          </div>
-          <div className="item">
             <div onClick={this.handleClick} className="ui button">
               Change Color
             </div>
