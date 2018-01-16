@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 const PaintingCard = props => {
   return (
@@ -17,10 +18,10 @@ const PaintingCard = props => {
         </div>
         <div className="extra">
           <div className="ui big buttons">
-            <div className="ui basic blue button">
-            <i className="add circle icon" />
+            <Link to={`/paintings/${props.painting.slug}`} className="ui basic blue button">
+              <i className="add circle icon" />
               More Info
-            </div>
+            </Link>
             <div className="ui button basic red">
               <i className="trash icon" />
             </div>
