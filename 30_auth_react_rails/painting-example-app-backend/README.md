@@ -8,3 +8,5 @@ When a user visits my web app have they been here before? if so, are they allowe
 ## Questions when adding any new feature
 Does the schema need to change?
 What routes do i need?
+"/current_user"
+"/auth/"

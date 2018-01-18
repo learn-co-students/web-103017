@@ -22,6 +22,7 @@ const login = data => {
 };
 
 const getCurrentUser = () => {
+  console.log('about to fetch the token is:', token);
   return fetch(`${API_ROOT}/current_user`, {
     headers: {
       Authorization: token
