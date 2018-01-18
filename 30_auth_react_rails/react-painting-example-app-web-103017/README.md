@@ -10,3 +10,9 @@ When a user visits my web app have they been here before? if so, are they allowe
 ## Questions when adding any new feature
 - Does the schema need to change?
 - What routes do i need?
+
+
+## Token
+
+- Identify who the user is
+- Rails should know that it has issued the token

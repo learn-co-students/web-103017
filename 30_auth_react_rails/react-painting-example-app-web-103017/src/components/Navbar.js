@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const colors = [
   'red',
@@ -32,6 +32,7 @@ class Navbar extends React.Component {
   }
 
   render() {
+    const loggedIn = !!this.props.currentUser.id;
     return (
       <div className={`ui top fixed inverted ${this.state.color} menu`}>
         <Link to="/" className="item">
@@ -48,9 +49,28 @@ class Navbar extends React.Component {
           <Link to="/paintings/new" className="item">
             new
           </Link>
-          <Link to="/login" className="item">
-            <div className="ui primary button">Log In</div>
-          </Link>
+          {loggedIn ? (
+            <div className="item">
+              Welcome {this.props.currentUser.username}
+            </div>
+          ) : (
+            <Link to="/login" className="item">
+              <div className="ui primary button">Log In</div>
+            </Link>
+          )}
+          {loggedIn ? (
+            <div className="item">
+              <div
+                onClick={() => {
+                  this.props.handleLogout();
+                  this.props.history.push('/login');
+                }}
+                className="ui red button"
+              >
+                Log Out
+              </div>
+            </div>
+          ) : null}
           <div className="item">
             <div onClick={this.handleClick} className="ui button">
               Change Color
@@ -62,4 +82,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);

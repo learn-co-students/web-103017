@@ -1,4 +1,5 @@
 import React from 'react';
+import api from '../services/api';
 
 class Login extends React.Component {
   constructor() {
@@ -19,7 +20,15 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('sumbitted', this.state.fields);
+    api.auth.login(this.state.fields).then(data => {
+      console.log('response is', data);
+      if (data.error) {
+        this.setState({ error: true });
+      } else {
+        this.props.handleLogin(data);
+        this.props.history.push('/');
+      }
+    });
   };
 
   render() {
