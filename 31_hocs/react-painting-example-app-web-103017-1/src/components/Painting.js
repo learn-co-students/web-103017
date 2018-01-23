@@ -6,7 +6,7 @@ const Painting = props => {
   // console.log('Painting props', props);
   return (
     <div className="item">
-      <div className="ui segment">
+      <div className={`ui ${props.color} segment`}>
         <div className="ui small image">
           <img src={props.painting.image} alt={props.painting.slug} />
         </div>

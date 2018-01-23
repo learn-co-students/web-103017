@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
-const PaintingShow = ({ painting }) => {
+const PaintingShow = ({ painting, color }) => {
   return (
-    <div className="ui segment">
+    <div className={`ui ${color} segment`}>
       <div className="ui centered card">
         <div className="image">
           <img src={painting.image} alt={painting.slug} />

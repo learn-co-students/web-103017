@@ -21,7 +21,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: 'purple'
+      color: props.color || 'purple'
     };
 
     this.handleClick = this.handleClick.bind(this);
