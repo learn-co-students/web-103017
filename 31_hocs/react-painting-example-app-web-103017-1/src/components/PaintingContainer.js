@@ -52,7 +52,7 @@ class PaintingContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: this.props.color }}>
         <Switch>
           <Route path="/paintings/new" component={PaintingNew} />
           <Route

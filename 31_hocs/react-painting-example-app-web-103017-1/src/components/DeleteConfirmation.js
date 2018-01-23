@@ -4,7 +4,11 @@ import Button from './Button';
 const DeleteConfirmation = props => {
   // console.log('DeleteConfirmation props', props);
   return (
-    <div className={`ui ${props.color} segment`}>
+    <div
+      className={`ui ${props.color
+        ? props.color + ' inverted'
+        : undefined} segment`}
+    >
       <div className="item">
         <div className="ui small image">
           <img src={props.painting.image} alt={props.painting.slug} />

@@ -4,7 +4,7 @@ import Button from './Button';
 
 const PaintingShow = ({ painting, color }) => {
   return (
-    <div className={`ui ${color} segment`}>
+    <div className={`ui ${color ? color + ' inverted' : undefined} segment`}>
       <div className="ui centered card">
         <div className="image">
           <img src={painting.image} alt={painting.slug} />

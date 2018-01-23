@@ -33,7 +33,7 @@ class App extends React.Component {
   render() {
     console.log('App state', this.state.auth);
     return (
-      <div className="App">
+      <div className="App" style={{ backgroundColor: this.props.color }}>
         <Navbar
           icon="paint brush"
           title="Painterest"
