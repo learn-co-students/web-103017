@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Button from './Button';
+import withColor from './hocs/withColor';
 
 const colors = [
   'red',
@@ -79,4 +80,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default withRouter(Navbar);
+export default withColor(withRouter(Navbar));

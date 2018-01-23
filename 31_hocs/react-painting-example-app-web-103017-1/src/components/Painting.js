@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './Button';
+import withColor from './hocs/withColor';
 
 const Painting = props => {
   // console.log('Painting props', props);
@@ -40,4 +41,4 @@ const Painting = props => {
     </div>
   );
 };
-export default Painting;
+export default withColor(Painting);

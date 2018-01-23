@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './Button';
+import withColor from './hocs/withColor';
 
 const PaintingShow = ({ painting, color }) => {
   return (
@@ -34,4 +35,4 @@ const PaintingShow = ({ painting, color }) => {
   );
 };
 
-export default PaintingShow;
+export default withColor(PaintingShow);

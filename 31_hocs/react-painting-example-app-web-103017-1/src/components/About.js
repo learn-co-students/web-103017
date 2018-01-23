@@ -1,13 +1,7 @@
 import React from 'react';
+import withAuth from './hocs/withAuth';
 
 class About extends React.Component {
-  componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.props.history.push('/login');
-    }
-  }
-
   render() {
     return (
       <div>
@@ -59,4 +53,4 @@ class About extends React.Component {
   }
 }
 
-export default About;
+export default withAuth(About);

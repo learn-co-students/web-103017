@@ -5,6 +5,8 @@ import PaintingShow from './PaintingShow';
 import { Switch, Route } from 'react-router-dom';
 // import artworks from '../artworks';
 import api from '../services/api';
+import withColor from './hocs/withColor';
+import withAuth from './hocs/withAuth';
 
 class PaintingContainer extends React.Component {
   constructor(props) {
@@ -16,15 +18,9 @@ class PaintingContainer extends React.Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      api.paintings.getPaintings().then(paintings => {
-        this.setState({ paintings: this.sortPaintings(paintings) });
-      });
-    } else {
-      this.props.history.push('/login');
-    }
+    api.paintings.getPaintings().then(paintings => {
+      this.setState({ paintings: this.sortPaintings(paintings) });
+    });
   }
 
   sortPaintings(paintings) {
@@ -88,4 +84,4 @@ class PaintingContainer extends React.Component {
     );
   }
 }
-export default PaintingContainer;
+export default withColor(withAuth(PaintingContainer));

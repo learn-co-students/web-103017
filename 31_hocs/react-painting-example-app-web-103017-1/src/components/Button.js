@@ -1,4 +1,5 @@
 import React from 'react';
+import withColor from './hocs/withColor';
 
 const Button = props => {
   return (
@@ -9,4 +10,4 @@ const Button = props => {
   );
 };
 
-export default Button;
+export default withColor(Button);

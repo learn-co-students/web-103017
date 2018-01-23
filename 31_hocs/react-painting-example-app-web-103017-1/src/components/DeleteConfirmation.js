@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import withColor from './hocs/withColor';
 
 const DeleteConfirmation = props => {
   // console.log('DeleteConfirmation props', props);
@@ -27,4 +28,4 @@ const DeleteConfirmation = props => {
     </div>
   );
 };
-export default DeleteConfirmation;
+export default withColor(DeleteConfirmation);

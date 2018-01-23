@@ -5,6 +5,7 @@ import About from './About';
 import Login from './Login';
 import { Route, Switch } from 'react-router-dom';
 import api from '../services/api';
+import withColor from './hocs/withColor';
 
 class App extends React.Component {
   state = { auth: { currentUser: {} } };
@@ -60,4 +61,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withColor(App);
