@@ -26,16 +26,22 @@ import App from './App';
 
 // LECTURE
 // ===================
-const initialState = { count: 99 };
+const initialState = [
+  { count: 99 },
+  { count: 99 },
+  { count: 99 },
+  { count: 99 },
+  { count: 99 }
+];
 
 const reducer = (state = initialState, action) => {
   console.log('current state', state);
   console.log('action', action);
   switch (action.type) {
     case 'INCREMENT':
-      return { count: state.count + action.amount };
+      return state;
     case 'DECREMENT':
-      return { count: state.count - action.amount };
+      return state;
     default:
       return state;
   }

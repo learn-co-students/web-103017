@@ -6,7 +6,7 @@ class Counter extends Component {
     console.log('COUNTER props are', this.props);
     return (
       <div className="Counter">
-        <h1>{this.props.count}</h1>
+        <h1>{0}</h1>
         <button onClick={this.props.decrement}> - </button>
         <button onClick={this.props.increment}> + </button>
       </div>
