@@ -3,6 +3,46 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import logo from './logo.svg';
 import './App.css';
+import { createStore } from 'redux';
+
+// state stored in a single place called 'state' 'state tree'
+
+//
+// const reducer = (state = { isRaining: false }, action) => {
+//   console.log('current state', state);
+//   console.log('action', action);
+//
+//   switch (action.type) {
+//     case 'TOGGLE_RAINING':
+//       return { isRaining: !state.isRaining };
+//     case 'STOP_RAINING':
+//       return { isRaining: false };
+//     default:
+//       return state;
+//   }
+// };
+
+const reducer = (state = { count: 25 }, action) => {
+  console.log('current state', state);
+  console.log('action', action);
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    case 'INCREMENT_BY_TWO':
+      return { count: state.count + 2 };
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
+
+store.subscribe(() => {
+  console.log('the new state is', store.getState());
+  console.log('--------------');
+});
 
 class App extends Component {
   render() {
@@ -29,12 +69,18 @@ class Header extends Component {
 class Counter extends Component {
   state = { count: 0 };
 
+  componentWillMount() {
+    store.subscribe(() => this.setState({}));
+  }
+
   increment = () => {
-    this.setState(prevState => ({ count: prevState.count + 1 }));
+    store.dispatch({ type: 'INCREMENT' });
+    // this.setState(prevState => ({ count: prevState.count + 1 }));
   };
 
   decrement = () => {
-    this.setState(prevState => ({ count: prevState.count - 1 }));
+    store.dispatch({ type: 'DECREMENT' });
+    // this.setState(prevState => ({ count: prevState.count - 1 }));
   };
 
   renderDescription = () => {
@@ -46,9 +92,11 @@ class Counter extends Component {
   render() {
     return (
       <div className="Counter">
-        <h1>{this.state.count}</h1>
+        <h1>{store.getState().count}</h1>
         <button onClick={this.decrement}> - </button>
         <button onClick={this.increment}> + </button>
+        <button onClick={() => ({})}> + 2</button>
+        <button onClick={() => ({})}> + 5</button>
         <h3>{this.renderDescription()}</h3>
       </div>
     );
