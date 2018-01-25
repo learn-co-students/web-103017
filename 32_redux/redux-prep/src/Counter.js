@@ -6,28 +6,41 @@ class Counter extends Component {
     console.log('COUNTER props are', this.props);
     return (
       <div className="Counter">
-        <h1>{0}</h1>
-        <button onClick={this.props.decrement}> - </button>
-        <button onClick={this.props.increment}> + </button>
+        <h1>{this.props.count}</h1>
+        <button
+          onClick={() => {
+            this.props.decrement(this.props.index);
+          }}
+        >
+          {' '}
+          -{' '}
+        </button>
+        <button
+          onClick={() => {
+            this.props.increment(this.props.index);
+          }}
+        >
+          {' '}
+          +{' '}
+        </button>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    count: state.count
+    count: state[ownProps.index].count
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  console.log('dispatch', dispatch);
   return {
-    increment: () => {
-      dispatch({ type: 'INCREMENT', amount: 1 });
+    increment: index => {
+      dispatch({ type: 'INCREMENT', amount: 1, index });
     },
-    decrement: () => {
-      dispatch({ type: 'DECREMENT', amount: 1 });
+    decrement: index => {
+      dispatch({ type: 'DECREMENT', amount: 1, index });
     }
   };
 };

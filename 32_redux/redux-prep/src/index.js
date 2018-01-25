@@ -28,20 +28,32 @@ import App from './App';
 // ===================
 const initialState = [
   { count: 99 },
-  { count: 99 },
-  { count: 99 },
-  { count: 99 },
-  { count: 99 }
+  { count: 100 },
+  { count: 101 },
+  { count: 102 },
+  { count: 103 }
 ];
 
 const reducer = (state = initialState, action) => {
   console.log('current state', state);
   console.log('action', action);
+
+  const { index, amount } = action;
+
   switch (action.type) {
     case 'INCREMENT':
-      return state;
+      let newCount = (state[index].count = state[index].count + 1);
+      return [
+        ...state.slice(0, index),
+        { count: state[index].count + 1 },
+        ...state.slice(index + 1)
+      ];
     case 'DECREMENT':
-      return state;
+      return [
+        ...state.slice(0, index),
+        { count: state[index].count - amount },
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }
