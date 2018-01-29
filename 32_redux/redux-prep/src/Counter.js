@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import myConnect from './myConnect';
 import { connect } from 'react-redux';
+
+import * as actions from './actions';
 
 class Counter extends Component {
   render() {
-    console.log('COUNTER props are', this.props);
     return (
       <div className="Counter">
         <h1>{this.props.count}</h1>
-        <button onClick={this.props.decrement}> - </button>
-        <button onClick={this.props.increment}> + </button>
+        <button onClick={() => this.props.decrement(2)}> - </button>
+        <button onClick={() => this.props.increment(2)}> + </button>
       </div>
     );
   }
@@ -20,15 +22,15 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    increment: () => {
-      dispatch({ type: 'INCREMENT', amount: 1 });
-    },
-    decrement: () => {
-      dispatch({ type: 'DECREMENT', amount: 1 });
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     increment: amount => {
+//       dispatch(actions.incrementActionCreator(amount));
+//     },
+//     decrement: amount => {
+//       dispatch(actions.decrementActionCreator(amount));
+//     }
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(mapStateToProps, actions)(Counter);
