@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PaintingList from './PaintingList';
 import PaintingShow from './PaintingShow';
 import * as actions from '../actions';
+// ^^ this means we get an object with a primary key of actions
+// its values will be
 // NOTE: actions is a directory.
 // By default import will look for a file called index.js in any directory
 
@@ -16,6 +18,7 @@ class PaintingContainer extends Component {
   }
 
   render() {
+    console.log("in paintingContainer, props are", this.props)
     return (
       <div className="row">
         <div className="six wide column">
