@@ -6,4 +6,5 @@ const configureStore = () => {
   // but there could be in the future
   return createStore(rootReducer);
 };
+
 export default configureStore;

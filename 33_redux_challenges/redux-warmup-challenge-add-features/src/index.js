@@ -9,6 +9,7 @@ import configureStore from './configureStore';
 
 const store = configureStore();
 
+// debugger;
 ReactDOM.render(
   <Provider store={store}>
     <App />
