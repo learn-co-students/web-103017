@@ -26,7 +26,7 @@ const reducer = (state = defaultState, action) => {
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>
