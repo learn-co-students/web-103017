@@ -8,14 +8,11 @@ import * as actions from '../actions';
 
 class PaintingContainer extends Component {
   componentDidMount() {
-    // NOTE: no async stuff yet. For now we'll
-    // just fetch some data in another file.
-    // We'll still use the lifecycle method
-    // so we can easily add async later
     this.props.fetchPaintings();
   }
 
   render() {
+    // console.log('THIS.PROPS in Container', this.props);
     return (
       <div className="row">
         <div className="six wide column">
@@ -33,10 +30,22 @@ class PaintingContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  paintings: state.paintings,
-  activePainting: state.paintings.find(p => p.id === state.activePaintingId)
-});
+const mapStateToProps = state => {
+  return {
+    paintings: state.paintings.filter(pntg => {
+      if (state.visiblePaintings === 'ALL') {
+        return true;
+      } else {
+        return pntg.museum.name === state.visiblePaintings;
+      }
+    }),
+    activePainting: state.paintings.find(p => p.id === state.activePaintingId)
+  };
+};
+
+// const mapDispatchToProps = dispatch => ({
+//   fetchPaintings: () => dispatch(actions.fetchPaintings())
+// });
 
 export default connect(mapStateToProps, actions)(PaintingContainer);
 // NOTE: here we're using the shorthand syntax for mapDispatchToProps
