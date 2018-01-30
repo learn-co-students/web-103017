@@ -7,6 +7,8 @@ import {
 
 export function fetchPaintings() {
   return dispatch => {
+    dispatch({ type: 'ASYNC_START' });
+
     fetch('http://localhost:3001/api/v1/paintings')
       .then(res => res.json())
       .then(data => {
