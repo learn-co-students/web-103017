@@ -8,15 +8,11 @@ import * as actions from '../actions';
 
 class PaintingContainer extends Component {
   componentDidMount() {
-    // NOTE: no async stuff yet. For now we'll
-    // just fetch some data in another file.
-    // We'll still use the lifecycle method
-    // so we can easily add async later
     this.props.fetchPaintings();
   }
 
   render() {
-    console.log('THIS.PROPS in Container', this.props);
+    // console.log('THIS.PROPS in Container', this.props);
     return (
       <div className="row">
         <div className="six wide column">

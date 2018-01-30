@@ -7,7 +7,7 @@ import {
 } from './actions/types';
 
 const paintingsReducer = (state = [], action) => {
-  console.log('in the Paintingsreducer', action);
+  // console.log('in the Paintingsreducer', action);
   switch (action.type) {
     case FETCH_PAINTINGS:
       return [...action.payload];
@@ -19,7 +19,7 @@ const paintingsReducer = (state = [], action) => {
 };
 
 const activePaintingIdReducer = (state = null, action) => {
-  console.log('in the ActivePaintingID reducer', action);
+  // console.log('in the ActivePaintingID reducer', action);
   switch (action.type) {
     case SELECT_ACTIVE_PAINTING:
       return action.id;
